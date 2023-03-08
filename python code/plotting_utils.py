@@ -38,3 +38,35 @@ def plot2(mean_value, idx, df, key):
     plt.show()
 
 # plot correlation
+def corr():
+    pass
+def org_distribution_graph(df, col):
+    # Get value counts for Outlet_Location_Type column
+    location_counts = df[col].value_counts()
+
+    # Plot bar chart of value counts
+    plt.bar(location_counts.index, location_counts.values)
+
+    # Set plot title and axis labels
+    plt.title(f'Real Distribution of {col}')
+    plt.xlabel(col)
+    plt.ylabel('Count')
+
+    # Show plot
+    plt.show()
+
+def after_distribution_graph(df, col):
+    # Get value counts for Outlet_Location_Type column
+    location_counts = df[col].value_counts()
+
+    # Plot bar chart of value counts
+    plt.bar(location_counts.index, location_counts.values)
+
+    # Set plot title and axis labels
+    plt.title(f'Distribution of {col} after Random forest method')
+    plt.xlabel(col)
+    plt.ylabel('Count')
+
+    # Show plot
+    plt.show()
+

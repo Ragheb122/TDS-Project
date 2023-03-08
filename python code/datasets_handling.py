@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LinearRegression
 import math
 import matplotlib.pyplot as plt
@@ -70,5 +71,98 @@ def StudentsPerformance_handling(ds):
     y_actual = list(df_original.loc[idx, 'reading score'])
     y_predicted = list(df.loc[idx, 'reading score'])
     return df_original, df, idx, y_actual, y_predicted, key
+
+def Mart_Sale_Forecast_handling(ds):
+    length = 150
+    df = pd.read_csv(ds).head(700)
+    df_original = pd.read_csv(ds).head(700)
+    df_plot_org = df
+    # set some null values
+    idx = np.random.choice(df.index, size=length, replace=False)
+    df.loc[idx, 'Outlet_Location_Type'] = np.nan
+    mask1_df = df["Outlet_Location_Type"].isnull()
+    # drop null values from dataset to train
+    df_copy1 = df.copy()
+    df_copy1.dropna(axis=0, inplace=True)
+    # predicting the null values using random forest algorithm
+    X = df_copy1.iloc[:, [1, 3, 5, 7, 10]]
+    Y = df_copy1.iloc[:, 8]
+    X_Test = df[mask1_df].iloc[:, [1, 3, 5, 7, 10]]
+    X_Test = np.nan_to_num(X_Test)
+    classifier = RandomForestClassifier()
+    classifier = classifier.fit(X, Y)
+    res = classifier.predict(X_Test)
+    # Add the predicted values to a new column in the original DataFrame
+    df_original.loc[mask1_df, 'Outlet_Location_Type_predicted'] = res
+    # fill nan values with predicted values
+    j = 0
+    arr = df[df['Outlet_Location_Type'].isna()].index
+    for i in arr:
+        df.at[i, 'Outlet_Location_Type'] = res[j]
+        j += 1
+    df_plot_after = df
+    y_actual = list(df_original.loc[idx, 'Outlet_Location_Type'])
+    y_predicted = list(df.loc[idx, 'Outlet_Location_Type'])
+    counter = 0
+    num = list(df_original['Outlet_Location_Type'])[0]
+    # finding the most frequent class
+    for i in list(df_original['Outlet_Location_Type']):
+        curr_frequency = list(df_original['Outlet_Location_Type']).count(i)
+        if (curr_frequency > counter):
+            counter = curr_frequency
+            num = i
+    most_freq = num
+    # fill nulls with the most frequent value
+    j = 0
+    for i in arr:
+        df.at[i, 'Outlet_Location_Type'] = most_freq
+        j += 1
+    return df_plot_org, df_plot_after, y_actual, y_predicted, most_freq
+
+def titanic_handling(ds):
+    length = 100
+    df = pd.read_csv("titanic.csv")
+    df_original = pd.read_csv("titanic.csv")
+    df_plot_org = df
+    # set some null values
+    idx = np.random.choice(df.index, size=length, replace=False)
+    df.loc[idx, 'Embarked'] = np.nan
+    mask1_df = df["Embarked"].isnull()
+    # drop null values from dataset to train
+    df_copy1 = df.copy()
+    df_copy1.dropna(axis=0, inplace=True)
+    # predicting the null values using random forest algorithm
+    X = df_copy1.iloc[:, [1, 2, 5, 6, 7, 9]]
+    Y = df_copy1.iloc[:, 10]
+    X_Test = df[mask1_df].iloc[:, [1, 2, 5, 6, 7, 9]]
+    X_Test = np.nan_to_num(X_Test)
+    classifier = RandomForestClassifier()
+    classifier = classifier.fit(X, Y)
+    res = classifier.predict(X_Test)
+    # Add the predicted values to a new column in the original DataFrame
+    df_original.loc[mask1_df, 'Embarked_predicted'] = res
+    # fill nan values with predicted values
+    j = 0
+    arr = df[df['Embarked'].isna()].index
+    for i in arr:
+        df.at[i, 'Embarked'] = res[j]
+        j += 1
+    df_plot_after = df
+    y_actual = list(df_original.loc[idx, 'Embarked'])
+    y_predicted = list(df.loc[idx, 'Embarked'])
+    counter = 0
+    num = list(df_original['Embarked'])[0]
+    for i in list(df_original['Embarked']):
+        curr_frequency = list(df_original['Embarked']).count(i)
+        if curr_frequency > counter:
+            counter = curr_frequency
+            num = i
+    most_freq = num
+    # fill nulls with the most frequent value
+    j = 0
+    for i in arr:
+        df.at[i, 'Embarked'] = most_freq
+        j += 1
+    return df_plot_org, df_plot_after, y_actual, y_predicted, most_freq
 
 
