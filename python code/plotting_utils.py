@@ -36,3 +36,5 @@ def plot2(mean_value, idx, df, key):
 
     # Show plot
     plt.show()
+
+# plot correlation
