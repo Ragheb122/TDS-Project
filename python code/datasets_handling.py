@@ -1,10 +1,9 @@
 import pandas as pd
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LinearRegression
-import math
-import matplotlib.pyplot as plt
-import seaborn as sns
+import sklearn
+# from sklearn.ensemble import RandomForestClassifier
+# from sklearn.linear_model import LinearRegression
+
 
 def vgsales_handling(ds):
     key = 'Other_Sales'
