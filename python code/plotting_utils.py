@@ -1,5 +1,6 @@
 import matplotlib as plt
-
+import seaborn as sns
+import pandas as pd
 # string1 = 'Other_Sales'
 def plot1(df_original, df, idx, key):
     # Plot predicted values
@@ -38,8 +39,19 @@ def plot2(mean_value, idx, df, key):
     plt.show()
 
 # plot correlation
-def corr():
-    pass
+def corr_plot(key, value, col):
+    df1 = pd.read_csv(key).head(value)
+    df = pd.read_csv(key).head(value)
+    # Compute the correlation matrix
+    corr = df.corr()
+    sns.heatmap(corr, annot=True, cmap='coolwarm')
+    plt.show()
+
+    # find the correlation of each column with "other_sales"
+    corr_matrix = df1.corr()[col]
+
+    # print the correlation values
+    print(corr_matrix)
 def org_distribution_graph(df, col):
     # Get value counts for Outlet_Location_Type column
     location_counts = df[col].value_counts()
