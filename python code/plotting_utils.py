@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
-# string1 = 'Other_Sales'
+# plot1 : function that plot two graphs, one of the predicted values and the other is for the original values
 def plot1(df_original, df, idx, key):
     # Plot predicted values
     plt.subplot(1, 2, 1)
@@ -23,6 +23,7 @@ def plot1(df_original, df, idx, key):
     # Show plot
     plt.show()
 
+# plot2 : function that plot one graph of the mean value and the actual values
 def plot2(mean_value, idx, df, key):
     # Plot mean value in green
     plt.axhline(y=mean_value, color='green', linestyle='--', label='Mean')
@@ -52,6 +53,9 @@ def corr_plot(key, value, col):
 
     # print the correlation values
     print(corr_matrix)
+
+
+# org_distribution_graph function to plot a graph for the original distribution for the given dataset and column
 def org_distribution_graph(df, col):
     # Get value counts for Outlet_Location_Type column
     location_counts = df[col].value_counts()
@@ -67,6 +71,7 @@ def org_distribution_graph(df, col):
     # Show plot
     plt.show()
 
+# after_distribution_graph function to plot a graph for the distribution for the given dataset and column after filling values
 def after_distribution_graph(df, col):
     # Get value counts for Outlet_Location_Type column
     location_counts = df[col].value_counts()

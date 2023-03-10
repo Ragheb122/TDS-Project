@@ -1,13 +1,13 @@
 import math
 import numpy as np
 
-
+# RMSE function : compare actual values and predicted values using RMSE method and return error rate
 def RMSE(y_actual, y_predicted, key):
     MSE = np.square(np.subtract(y_actual, y_predicted)).mean()
     RMSE = math.sqrt(MSE)
     print(f"Root Mean Square Error using {key} method:")
     print(RMSE)
-
+# compare function : compare actual values and predicted values and return error rate
 def compare(y_actual, y_predicted, key):
     sum = 0
     for i in range(len(y_actual)):
