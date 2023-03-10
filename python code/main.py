@@ -4,10 +4,10 @@ from datasets_handling import *
 from empirical_experiments_utils import RMSE, compare
 from plotting_utils import plot1, plot2, org_distribution_graph, after_distribution_graph, corr_plot
 warnings.filterwarnings('ignore')
-FORECAST_DF = r"C:\Users\ahmad\PycharmProjects\tds-new\datasets\Big Mart Sale Forecast.csv"
-TITANIC_DF = r"C:\Users\ahmad\PycharmProjects\tds-new\datasets\titanic.csv"
-STUDENTS_DF = r"C:\Users\ahmad\PycharmProjects\tds-new\datasets\StudentsPerformance.csv"
-VGSALES_DF = r"C:\Users\ahmad\PycharmProjects\tds-new\datasets\vgsales.csv"
+FORECAST_DF = "https://raw.githubusercontent.com/Ragheb122/TDS-Project/main/datasets/Big%20Mart%20Sale%20Forecast.csv"
+TITANIC_DF = "https://raw.githubusercontent.com/Ragheb122/TDS-Project/main/datasets/titanic.csv"
+STUDENTS_DF = "https://raw.githubusercontent.com/Ragheb122/TDS-Project/main/datasets/StudentsPerformance.csv"
+VGSALES_DF = "https://raw.githubusercontent.com/Ragheb122/TDS-Project/main/datasets/vgsales.csv"
 # dataset 1
 df_original, df, idx, y_actual, y_predicted, key = vgsales_handling(VGSALES_DF)
 corr_plot(VGSALES_DF, 500, 'Other_Sales')
@@ -37,3 +37,4 @@ compare(y_actual, y_predicted, 'Random Forest')
 org_distribution_graph(df_plot_org, 'Embarked')
 compare(y_actual, [most_freq] * len(y_actual), 'Most Frequent')
 after_distribution_graph(df_plot_after, 'Embarked')
+
