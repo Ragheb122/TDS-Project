@@ -37,20 +37,3 @@ compare(y_actual, y_predicted, 'Random Forest')
 org_distribution_graph(df_plot_org, 'Embarked')
 compare(y_actual, [most_freq] * len(y_actual), 'Most Frequent')
 after_distribution_graph(df_plot_after, 'Embarked')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

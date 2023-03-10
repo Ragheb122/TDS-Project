@@ -86,4 +86,3 @@ def after_distribution_graph(df, col):
 
     # Show plot
     plt.show()
-

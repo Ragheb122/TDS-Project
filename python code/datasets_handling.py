@@ -178,5 +178,3 @@ def titanic_handling(ds):
         df.at[i, 'Embarked'] = most_freq
         j += 1
     return df_plot_org, df_plot_after, y_actual, y_predicted, most_freq
-
-
